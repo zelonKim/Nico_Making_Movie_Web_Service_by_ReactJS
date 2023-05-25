@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+        <script src = "https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+        <script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+        <script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src = "https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+        <script type="text/babel">
+
+           /*  function SaveBtn() {
+                return <button
+                            style={{
+                                backgroundColor: "tomato",
+                                color: "white",
+                                padding: "10px 20px",
+                                border: 0,
+                                borderRadius: 10,
+                            }}>
+                         Save Changes</button>;
+            }
+            
+            function ConfirmBtn() {
+                return <button
+                            style={{
+                                backgroundColor: "tomato",
+                                color: "white",
+                                padding: "10px 20px",
+                                border: 0,
+                                borderRadius: 10,
+                            }}>
+                        Confirm</button>;
+            }
+
+
+            function App() {
+                return (
+                    <div>
+                       <SaveBtn />
+                       <ConfirmBtn />         
+                    </div>
+                ); 
+            } 
+            */
+
+
+
+        /*          
+         function Btn(props) {
+
+                console.log(props)// {title: 'Save Changes'}  // {title: 'Continue'} 
+                
+                return <button
+                            style={{
+                                backgroundColor: "tomato",
+                                color: "white",
+                                padding: "10px 20px",
+                                border: 0,
+                                borderRadius: 10,
+                            }}>
+                         {props.title}</button>;
+            }
+            
+           
+            function App() {
+                return (
+                    <div>
+                       <Btn title="Save Changes" />
+                       <Btn title="Continue"/>         
+                    </div>
+                );  
+            } 
+            */
+
+
+
+        /*            
+            function Btn({title}) {  
+           
+                return <button
+                            style={{
+                                backgroundColor: "tomato",
+                                color: "white",
+                                padding: "10px 20px",
+                                border: 0,
+                                borderRadius: 10,
+                            }}>
+                         {title}</button>;
+            }
+            
+           
+            function App() {
+                return (
+                    <div>
+                       <Btn title="Save Changes" />
+                       <Btn title="Continue"/>         
+                    </div>
+                );  
+            }  
+        */
+
+        /* 
+        function Btn({title, big}) {  
+           
+            console.log(big) //  true    // undefined
+
+           return <button
+                       style={{
+                           backgroundColor: "tomato",
+                           color: "white",
+                           padding: "10px 20px",
+                           border: 0,
+                           borderRadius: 10,
+                           fontSize: big ? 25 : 15
+                       }}>
+                    {title}</button>;
+       }
+       
+      
+       function App() {
+           return (
+               <div>
+                  <Btn title="Save Changes" big={true}/>
+                  <Btn title="Continue"  />         
+               </div>
+           );  
+       }  
+        */
+
+        /* 
+        function Btn({title, clickProp}) {  
+           
+          return <button
+                      onClick= {clickProp}
+                      style={{
+                          backgroundColor: "tomato",
+                          color: "white",
+                          padding: "10px 20px",
+                          border: 0,
+                          borderRadius: 10,
+                          fontSize: 10
+                      }}>
+                   {title}</button>;
+      }
+      
+     
+      function App() {
+        const [value, setValue] = React.useState("Save Changes")
+        
+        const changeValue = () => setValue("Revert Changes")  
+
+        return (
+              <div>
+                 <Btn title={value} clickProp ={changeValue} />
+                 <Btn title="Continue"  />         
+              </div>
+          );  
+      }   
+      */
+
+
+      /* 
+      function Btn({title, clickProp}) {  
+
+        console.log(title, "was rendered")  // 버튼 클릭 시, title값의 변화가 없는 'Continue was rendered'도 계속 출력됨.
+           
+           return <button
+                       onClick= {clickProp}
+                       style={{
+                           backgroundColor: "tomato",
+                           color: "white",
+                           padding: "10px 20px",
+                           border: 0,
+                           borderRadius: 10,
+                           fontSize: 10
+                       }}>
+                    {title}</button>;
+       }
+       
+       function App() {
+         const [value, setValue] = React.useState("Save Changes")
+         
+         const changeValue = () => setValue("Revert Changes")  
+ 
+         return (
+               <div>
+                  <Btn title={value} clickProp ={changeValue} />
+                  <Btn title="Continue"  />         
+               </div>
+           ); // setValue()로 상태(state)가 변경되면 React rule에 의해 return()안에 있는 모든 것들은 리렌더링 됨. 
+       }    
+       */
+
+    /*       
+    function Btn({title, clickProp}) {  
+
+        console.log(title, "was rendered")  // 버튼 클릭 시, title값의 변화가 없는 'Continue was rendered'는 출력되지 않음.
+           
+           return <button
+                       onClick= {clickProp}
+                       style={{
+                           backgroundColor: "tomato",
+                           color: "white",
+                           padding: "10px 20px",
+                           border: 0,
+                           borderRadius: 10,
+                           fontSize: 10
+                       }}>
+                    {title}</button>;
+       }
+       
+       const MemorizedBtn = React.memo(Btn);
+
+       function App() {
+         const [value, setValue] = React.useState("Save Changes")
+         
+         const changeValue = () => setValue("Revert Changes")  
+ 
+         return (
+               <div>
+                  <MemorizedBtn title={value} clickProp ={changeValue} />
+                  <MemorizedBtn title="Continue"  />         
+               </div>
+           );
+       }     
+       */
+
+    function Btn({title, fontSize = 10}) {  
+         
+           return <button
+                       style={{
+                           backgroundColor: "tomato",
+                           color: "white",
+                           padding: "10px 20px",
+                           border: 0,
+                           borderRadius: 10,
+                           // fontSize: fontSize,
+                           fontSize,
+                       }}>
+                    {title}</button>;
+       }
+       
+         Btn.propTypes = {
+             title: PropTypes.string.isRequired,
+             fontSize: PropTypes.number
+       };
+
+       function App() {
+        
+         return (
+               <div>
+                    <Btn title="Save Changes" fontSize={15} />
+                    <Btn title={20} fontSize="second Changes" />
+                    <Btn fontSize={25} />
+               </div>
+           );
+       }     
+
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            const root = document.getElementById("root");
+            ReactDOM.render(<App />, root) 
+
+
+        </script>
+</html> 

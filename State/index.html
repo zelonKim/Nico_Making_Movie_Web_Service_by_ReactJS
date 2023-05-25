@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+        <script src = "https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+        <script src = "https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+        <script src = "https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+/*             
+             const root = document.getElementById("root");
+
+            function App() {
+
+                const data = React.useState();
+                console.log(data) // [undefined, ƒ] === [데이터, 데이터를 바꿀때 사용할 함수]
+
+                return (
+                    <div>
+                        <h3> Total clicks: 0 </h3>
+                        <button> Click me </button>
+                    </div>
+                )
+            }
+
+            ReactDOM.render(<App />, root) 
+            */
+
+
+            /*             
+            const root = document.getElementById("root");
+
+            function App() {
+
+                const data = React.useState(10); // 초기 데이터 지정
+                console.log(data) // [10, ƒ] === [데이터, 데이터를 바꿀때 사용할 함수]
+
+                return (
+                    <div>
+                        <h3> Total clicks: {data[0]} </h3> 
+                        <button> Click me </button>
+                    </div>
+                ) // Total Clicks: 10
+            }
+
+            ReactDOM.render(<App />, root)  
+            */
+
+
+            /*            
+            const root = document.getElementById("root");
+
+            function App() {
+
+                const data = React.useState(10); // [데이터, 데이터를 바꿀때 사용할 함수]
+                const counter = data[0]; // 데이터
+                const modifier = data[1] // 데이터를 바꿀때 사용할 함수
+
+                return (
+                    <div>
+                        <h3> Total clicks: {counter} </h3> 
+                        <button> Click me </button>
+                    </div>
+                ) // Total Clicks: 10
+            }
+
+            ReactDOM.render(<App />, root)
+            */  
+
+
+             /* 
+             const root = document.getElementById("root");
+
+            function App() {
+
+                const [counter, modifier] = React.useState(10); // [데이터, 데이터를 바꿀때 사용할 함수]
+               
+                return (
+                    <div>
+                        <h3> Total clicks: {counter} </h3> 
+                        <button> Click me </button>
+                    </div>
+                ) // Total Clicks: 10
+            }
+
+            ReactDOM.render(<App />, root) 
+            */
+
+
+/*            const root = document.getElementById("root");
+
+            function App() {
+
+                const [counter, modifier] = React.useState(0); // [데이터, 데이터를 바꿀때 사용할 함수]
+               
+                const onClick = () => {
+                    modifier(550) // 데이터를 550으로 바꿔주고, 리렌더링 까지 해줌.
+                }
+
+                return (
+                    <div>
+                        <h3> Total clicks: {counter} </h3> 
+                        <button onClick={onClick}> Click me </button>
+                    </div>
+                )
+            }
+
+            ReactDOM.render(<App />, root)   */         
+
+
+/* 
+           const root = document.getElementById("root");
+
+            function App() {
+
+                const [counter, setCounter] = React.useState(0); // [데이터, 데이터를 바꿀때 사용할 함수]
+               
+                const onClick = () => {
+                    setCounter(counter + 1) // 데이터를 1 더해주고 , (자동으로) 리렌더링까지 해줌.
+                }
+
+
+                return (
+                    <div>
+                        <h3> Total clicks: {counter} </h3> 
+                        <button onClick={onClick}> Click me </button>
+                    </div>
+                )
+            }
+
+            ReactDOM.render(<App />, root)  */
+     
+
+
+            /*             
+            const root = document.getElementById("root");
+
+            function App() {
+
+                const [counter, setCounter] = React.useState(0); // [데이터, 데이터를 바꿀때 사용할 함수]
+               
+                const onClick = () => {
+                    setCounter(counter + 1) 
+                }
+
+                console.log("test") // setCounter로 리렌더링 될 때마다 계속 test가 출력됨. -> setCounter는 리렌더링 하면서 컴포넌트 자체(전체)를 재생성함.
+
+                return (
+                    <div>
+                        <h3> Total clicks: {counter} </h3> 
+                        <button onClick={onClick}> Click me </button>
+                    </div>
+                )
+            }
+
+            ReactDOM.render(<App />, root) 
+            */
+
+            /* 
+            const root = document.getElementById("root");
+
+            function App() {
+
+                const [counter, setCounter] = React.useState(0); // [데이터, 데이터를 바꿀때 사용할 함수]
+            
+                const onClick = () => {
+                    setCounter((current) => current + 1) //  현재 state를 바탕으로 다음 state를 계산해낼 때는 인수로 콜백 함수를 넣어주는것이 좋음. (콜백함수의 첫번째 매개변수는 현재 데이터임.)
+                } 
+
+                return (
+                    <div>
+                        <h3> Total clicks: {counter} </h3> 
+                        <button onClick={onClick}> Click me </button>
+                    </div>
+                )
+            } 
+            ReactDOM.render(<App />, root) 
+            */
+
+
+           /*
+            const root = document.getElementById("root");
+
+            function App() {
+
+                const  [minutes, setMinutes] = React.useState(0)
+
+                const onchange = (e) => {
+                    console.log(e.target.value) // input창에 입력된 값을 콘솔에 출력함.
+                }  // (input창은 변화가 없이 그대로 0임.)
+
+                return (
+                    <div>
+                        <h1 className="hi">Super Converter</h1>
+                        
+                        <label htmlFor="minutes">Minutes</label> 
+                        <input 
+                            value={minutes} 
+                            id="minutes" 
+                            placeholder="Minutes"
+                            type="number" 
+                            onChange={onchange} // input창에 입력하는 이벤트가 발생하면 onchange 핸들러를 실행시킴.
+                            />
+                        
+                        <label htmlFor="hours">Hours</label>
+                        <input id="hours" placeholder="Hours" type="number"/>
+                    </div>
+                ); // JSX에서는 class속성 대신 className속성을, for속성 대신 htmlFor속성을 사용해야 함.
+            }
+            ReactDOM.render(<App />, root) 
+            */
+
+            
+            /* 
+            const root = document.getElementById("root");
+
+            function App() {
+
+                const [minutes, setMinutes] = React.useState(0)
+
+                const onchange = (e) => {
+                    setMinutes(e.target.value) // input창에 입력된 값으로 minutes데이터를 바꾸고, 리렌더링함.
+                } // (입력된 값에 따라 input창도 변함.)
+
+                return (
+                    <div>
+                        <h1 className="hi">Super Converter</h1>
+                        
+                        <label htmlFor="minutes">Minutes</label> 
+                        <input 
+                            value={minutes} 
+                            id="minutes" 
+                            placeholder="Minutes"
+                            type="number" 
+                            onChange={onchange} // input창에 입력하는 이벤트가 발생하면 onchange 핸들러를 실행시킴.
+                            />
+                        
+                        <h4>You want to convert {minutes}</h4>
+                        <label htmlFor="hours">Hours</label>
+                        <input id="hours" placeholder="Hours" type="number"/>
+                    </div>
+                );
+            }
+            ReactDOM.render(<App />, root) 
+            */ 
+
+
+            /* 
+            const root = document.getElementById("root");
+
+            function App() {
+
+                const [minutes, setMinutes] = React.useState(0)
+
+                const onchange = (e) => {
+                    setMinutes(e.target.value) 
+                } 
+
+                return (
+                    <div>
+                        <h1 className="hi">Super Converter</h1>
+                        <div>
+                            <label htmlFor="minutes">Minutes</label> 
+                            <input 
+                                value={minutes} 
+                                id="minutes" 
+                                placeholder="Minutes"
+                                type="number" 
+                                onChange={onchange}
+                                />
+                        </div>
+
+                        <div>
+                            <label htmlFor="hours">Hours</label>
+                            <input 
+                                value={Math.round(minutes/60)} 
+                                id="hours" 
+                                placeholder="Hours"
+                                type="number" 
+                                />
+                        </div>
+                    </div>
+                ); 
+            }
+            ReactDOM.render(<App />, root) 
+            // 분을 입력하면 시를 알려줌. 
+            */
+
+
+
+
+/*             const root = document.getElementById("root");
+
+            function App() {
+
+                const [minutes, setMinutes] = React.useState(0)
+
+                const onchange = (e) => {
+                    setMinutes(e.target.value) 
+                } 
+
+                const reset = () => {
+                    setMinutes(0);
+                }
+
+                return (
+                    <div>
+                        <h1 className="hi">Super Converter</h1>
+                        <div>
+                            <label htmlFor="minutes">Minutes</label> 
+                            <input 
+                                value={minutes} 
+                                id="minutes" 
+                                placeholder="Minutes"
+                                type="number" 
+                                onChange={onchange}
+                                />
+                        </div>
+
+                        <div>
+                            <label htmlFor="hours">Hours</label>
+                            <input 
+                                value={Math.round(minutes/60)} 
+                                id="hours" 
+                                placeholder="Hours"
+                                type="number" 
+                                disabled
+                                />
+                        </div>
+                        
+                        <div>
+                            <button onClick={reset}>Reset</button> // 리셋 버튼
+                        </div>
+
+                    </div>
+
+                ); 
+            }
+            ReactDOM.render(<App />, root) */ 
+
+
+            ///////////////////////
+            
+
+            /* function MinutesToHours() {
+                const [amount, setAmount] = React.useState(0)
+
+                const onchange = (e) => {
+                    setAmount(e.target.value) 
+                } 
+                const reset = () => {
+                    setAmount(0);
+                }
+
+                const [flipped, setflipped] = React.useState(false)
+
+                const flip = () => {
+                    reset();
+                    setflipped((current) => !current)
+                }
+
+                return (
+                    <div>
+                        <div>
+                            <label htmlFor="minutes">Minutes</label> 
+                            <input 
+                                value={flipped ? (amount * 60) : amount  } 
+                                id="minutes" 
+                                placeholder="Minutes"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {flipped}
+                                />
+                        </div>
+
+                        <div>
+                            <label htmlFor="hours">Hours</label>
+                            <input 
+                                value={flipped ? amount : Math.round(amount/60)} 
+                                id="hours" 
+                                placeholder="Hours"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {!flipped} 
+                                />
+                        </div>
+                        
+                        <div>
+                            <button onClick={reset}>Reset</button>
+                            <button onClick={flip}>{flipped ? "Turn back" : "invert"}</button>
+                        </div>
+                    </div>
+                ); 
+            } */
+
+            /////////////////////////////////
+
+
+            /* function MinutesToHours() {
+                const [amount, setAmount] = React.useState(0)
+
+                const onchange = (e) => {
+                    setAmount(e.target.value) 
+                } 
+                const reset = () => {
+                    setAmount(0);
+                }
+
+                const [flipped, setflipped] = React.useState(false)
+
+                const flip = () => {
+                    reset();
+                    setflipped((current) => !current)
+                }
+
+                return (
+                    <div>
+                        <div>
+                            <label htmlFor="minutes">Minutes</label> 
+                            <input 
+                                value={flipped ? (amount * 60) : amount  } 
+                                id="minutes" 
+                                placeholder="Minutes"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {flipped}
+                                />
+                        </div>
+
+                        <div>
+                            <label htmlFor="hours">Hours</label>
+                            <input 
+                                value={flipped ? amount : Math.round(amount/60)} 
+                                id="hours" 
+                                placeholder="Hours"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {!flipped} 
+                                />
+                        </div>
+                        
+                        <div>
+                            <button onClick={reset}>Reset</button>
+                            <button onClick={flip}>{flipped ? "Turn back" : "invert"}</button>
+                        </div>
+                    </div>
+                ); 
+            }
+
+            function KmToMiles () {
+                return <h3>Km 2 Miles </h3>
+            }
+            
+            function App() {
+                const [index, setIndex] = React.useState("0");
+
+                const onSelect = (event) => {
+                    setIndex(event.target.value)
+                }
+
+                return (
+                    <div>
+                        <h1>Super Converter</h1>
+                        <select value={index} onChange={onSelect}>
+                            <option value="0">Select the converter.</option>
+                            <option value="1">Minutes & Hours</option>
+                            <option value="2">Km & Miles</option>
+                        </select>
+                        <hr />
+                        {index === "1" ? <MinutesToHours /> : null }
+                        {index === "2" ? <KmToMiles /> : null }          
+                    </div>
+                ); 
+            }
+
+            const root = document.getElementById("root");
+            ReactDOM.render(<App />, root)
+ */
+/* 
+            function MinutesToHours() {
+                const [amount, setAmount] = React.useState(0)
+
+                const onchange = (e) => {
+                    setAmount(e.target.value) 
+                } 
+                const reset = () => {
+                    setAmount(0);
+                }
+
+                const [flipped, setflipped] = React.useState(false)
+
+                const flip = () => {
+                    reset();
+                    setflipped((current) => !current)
+                }
+
+                return (
+                    <div>
+                        <div>
+                            <label htmlFor="minutes">Minutes</label> 
+                            <input 
+                                value={flipped ? (amount * 60) : amount  } 
+                                id="minutes" 
+                                placeholder="Minutes"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {flipped}
+                                />
+                        </div>
+
+                        <div>
+                            <label htmlFor="hours">Hours</label>
+                            <input 
+                                value={flipped ? amount : Math.round(amount/60)} 
+                                id="hours" 
+                                placeholder="Hours"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {!flipped} 
+                                />
+                        </div>
+                        
+                        <div>
+                            <button onClick={reset}>Reset</button>
+                            <button onClick={flip}>{flipped ? "Turn back" : "invert"}</button>
+                        </div>
+                    </div>
+                ); 
+            }
+                
+            function KmToMiles() {
+                const [amount, setAmount] = React.useState(0)
+
+                const onchange = (e) => {
+                    setAmount(e.target.value) 
+                } 
+                const reset = () => {
+                    setAmount(0);
+                }
+
+                const [flipped, setflipped] = React.useState(false)
+
+                const flip = () => {
+                    reset();
+                    setflipped((current) => !current)
+                }
+
+                return (
+                    <div>
+                        <div>
+                            <label htmlFor="Km">Km</label> 
+                            <input 
+                                value={flipped ? Math.round(amount * 1.609) : amount  } 
+                                id="Km" 
+                                placeholder="Km"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {flipped}
+                                />
+                        </div>
+
+                        <div>
+                            <label htmlFor="Miles">Miles</label>
+                            <input 
+                                value={flipped ? amount :  Math.round(amount / 1.609)} 
+                                id="Miles" 
+                                placeholder="Miles"
+                                type="number" 
+                                onChange={onchange}
+                                disabled = {!flipped} 
+                                />
+                        </div>
+                        
+                        <div>
+                            <button onClick={reset}>Reset</button>
+                            <button onClick={flip}>{flipped ? "Turn back" : "invert"}</button>
+                        </div>
+                    </div>
+                ); 
+            }
+
+            function App() {
+                const [index, setIndex] = React.useState("0");
+
+                const onSelect = (event) => {
+                    setIndex(event.target.value)
+                }
+
+                return (
+                    <div>
+                        <h1>Super Converter</h1>
+                        <select value={index} onChange={onSelect}>
+                            <option value="0">Select the converter.</option>
+                            <option value="1">Minutes & Hours</option>
+                            <option value="2">Km & Miles</option>
+                        </select>
+                        <hr />
+                        {index === "1" ? <MinutesToHours /> : null }
+                        {index === "2" ? <KmToMiles /> : null }          
+                    </div>
+                ); 
+            }
+
+            const root = document.getElementById("root");
+            ReactDOM.render(<App />, root) 
+            */
+        </script>
+</html> 
