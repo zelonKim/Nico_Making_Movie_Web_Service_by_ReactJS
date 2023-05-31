@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 /* 
 function Food({names, picture}) {
@@ -145,7 +145,11 @@ export default App;
 // niceToMeetYou */
 
 
-////////////
+//////////////////////////
+
+/* import React from 'react';
+import axios from "axios";
+import Movie from "./Movie"
 
 
 class App extends React.Component {
@@ -155,18 +159,90 @@ class App extends React.Component {
     movies: []
   }
   
+  getMovies = async() => {
+    const {data: {data :{movies}}} = await axios.get("https://yts-proxy.now.sh/list_movies.json.sort_by=rating")
+    // this.setState({ movies: movies })  // {state의 movies : axios의 movies}
+    this.setState({ movies }) // 축약
+
+    this.setState({isLoading: false})
+
+  }
+
   componentDidMount() {
-    setTimeout(()=> {
-      this.setState({ isLoading: false})
-    }, 3000)
+    this.getMovies();
   }
 
   render() {
-    const {isLoading} = this.state;
-
+    const {isLoading, movies } = this.state;
     return (
-        <div>{isLoading ? "Loading.." : "we are ready"}</div>
+        <div>
+          {isLoading ? "Loading.." : movies.map(movie => 
+           <Movie 
+          key={movie.id}
+          id={movie.id} 
+          year={movie.year} 
+          title={movie.title} 
+          summary={movie.summary} 
+          poster={movie.medium_cover_image} />
+        )}</div>
       ) 
+  }
 }
+export default App;
+ */
+
+
+import React from 'react';
+import axios from "axios";
+import Movie from "./Movie"
+import "App.css"
+
+
+class App extends React.Component {
+
+  state = {
+    isLoading: true,
+    movies: []
+  }
+  
+  getMovies = async() => {
+    const {data: {data :{movies}}} = await axios.get("https://yts-proxy.now.sh/list_movies.json.sort_by=rating")
+    // this.setState({ movies: movies })  // {state의 movies : axios의 movies}
+    this.setState({ movies }) // 축약
+
+    this.setState({isLoading: false})
+
+  }
+
+  componentDidMount() {
+    this.getMovies();
+  }
+
+  render() {
+    const {isLoading, movies } = this.state;
+    return (
+        <section className = "container">
+          {isLoading ? (
+          <div className="loader">
+            <span className="loader__text">Loading...</span>
+          </div>
+          ) : (
+          <div className="movies">
+           {movies.map(movie => (
+              <Movie 
+              key={movie.id}
+              id={movie.id} 
+              year={movie.year} 
+              title={movie.title} 
+              summary={movie.summary} 
+              poster={movie.medium_cover_image} 
+              genres={movie.genres}
+              />
+        ))}
+        </div>
+          )}
+        </section>
+      ) 
+  }
 }
 export default App;
